@@ -79,7 +79,7 @@ pipeline {
               httpMode: 'GET',
               responseHandle: 'LEAVE_OPEN',
               timeout: 30,
-              url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')'';
+              url: 'https://' + env.CPIHost + "/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')";
              // url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
               
 
