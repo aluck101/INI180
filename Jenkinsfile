@@ -69,6 +69,7 @@ pipeline {
           def deploymentStatus;
           def continueLoop = true;
           println("Start checking integration artefact status.");
+          println("token: " + token);
           while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
             Thread.sleep(3000);
             counter = counter + 1;
