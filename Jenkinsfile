@@ -80,6 +80,7 @@ pipeline {
               httpMode: 'GET',
               responseHandle: 'LEAVE_OPEN',
               timeout: 30,
+              validResponseCodes: '200:404',
               url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
               
 
