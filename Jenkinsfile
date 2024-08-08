@@ -65,25 +65,25 @@ pipeline {
             url: 'https://' + env.CPIHost + '/api/v1/DeployIntegrationDesigntimeArtifact?Id=\'' + env.IntegrationFlowID + '\'&Version=\'active\'';
 
           //check if the flow was deployed 
-        //   Integer counter = 0;
-        //   def deploymentStatus;
-        //   def continueLoop = true;
-        //   println("Start checking integration artefact status.");
-        //   while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
-        //     Thread.sleep(3000);
-        //     counter = counter + 1;
-        //     def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
-        //       customHeaders: [
-        //         [maskValue: false, name: 'Authorization', value: token]
-        //       ],
-        //       httpMode: 'GET',
-        //       responseHandle: 'LEAVE_OPEN',
-        //       timeout: 30,
-        //       url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
+          Integer counter = 0;
+          def deploymentStatus;
+          def continueLoop = true;
+          println("Start checking integration artefact status.");
+          while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
+            Thread.sleep(3000);
+            counter = counter + 1;
+            def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
+              customHeaders: [
+                [maskValue: true, name: 'Authorization', value: token]
+              ],
+              httpMode: 'GET',
+              responseHandle: 'LEAVE_OPEN',
+              timeout: 30,
+              url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
               
 
-        //     def jsonStatusObj = readJSON text: statusResp.content;
-        //     deploymentStatus = jsonStatusObj.d.Status;
+            def jsonStatusObj = readJSON text: statusResp.content;
+            deploymentStatus = jsonStatusObj.d.Status;
 
             println("Deployment status: " + deploymentStatus);
             if (deploymentStatus.equalsIgnoreCase("Error")) {
