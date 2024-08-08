@@ -72,6 +72,7 @@ pipeline {
           while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
             Thread.sleep(3000);
             counter = counter + 1;
+            def encodedIntegrationFlowID = URLEncoder.encode(env.IntegrationFlowID, 'UTF-8')
             def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
               customHeaders: [
                 [maskValue: false, name: 'Authorization', value: token]
@@ -80,10 +81,8 @@ pipeline {
               responseHandle: 'LEAVE_OPEN',
               timeout: 30,
               consoleLogResponseBody: true,
-            //   url: "https://ccci-integration-suite-fuom1yo5.it-cpi024.cfapps.eu10-002.hana.ondemand.com/api/v1/IntegrationRuntimeArtifacts("CICDTest")";
-              url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
-              
-
+            //   url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
+              url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(%27' + env.IntegrationFlowID + '%27)';
             def jsonStatusObj = readJSON text: statusResp.content;
             deploymentStatus = jsonStatusObj.d.Status;
 
