@@ -82,7 +82,7 @@ pipeline {
               timeout: 30,
               consoleLogResponseBody: true,
               quiet: false,
-              ignoreSslErrors: false,
+              ignoreSslErrors: true,
               url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
             def jsonStatusObj = readJSON text: statusResp.content;
             deploymentStatus = jsonStatusObj.d.Status;
