@@ -3,7 +3,7 @@ pipeline {
 
   //Configure the following environment variables before executing the Jenkins Job
   environment {
-    IntegrationFlowID = "${en.IntegrationFlowID}"
+    IntegrationFlowID = "${env.IntegrationFlowID}"
     FailJobOnFailedMPL = true //if you are expecting your message to fail, set this to false, so that your job won't fail
     DeploymentCheckRetryCounter = 20 //multiply by 3 to get the maximum deployment time
     MPLCheckRetryCounter = 10 //multiply by 3 to get the maximum processing time. Example: 10 would be sufficient for message processings <30s
