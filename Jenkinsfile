@@ -73,7 +73,7 @@ pipeline {
           while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
             Thread.sleep(3000);
             counter = counter + 1;
-            def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
+            def statusResp = httpRequest acceptType: '*/*',
               customHeaders: [
                 [maskValue: false, name: 'Authorization', value: token]
               ],
