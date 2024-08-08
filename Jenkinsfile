@@ -81,8 +81,9 @@ pipeline {
               responseHandle: 'LEAVE_OPEN',
               timeout: 30,
               consoleLogResponseBody: true,
-            //   url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
-              url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(%27' + env.IntegrationFlowID + '%27)';
+              quiet: false,
+              ignoreSslErrors: false,
+              url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
             def jsonStatusObj = readJSON text: statusResp.content;
             deploymentStatus = jsonStatusObj.d.Status;
 
