@@ -72,7 +72,6 @@ pipeline {
           while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
             Thread.sleep(3000);
             counter = counter + 1;
-            println("Counter: " + counter);
             def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
               customHeaders: [
                 [maskValue: false, name: 'Authorization', value: token]
@@ -80,7 +79,8 @@ pipeline {
               httpMode: 'GET',
               responseHandle: 'LEAVE_OPEN',
               timeout: 30,
-              url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
+              url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')'';
+             // url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
               
 
             def jsonStatusObj = readJSON text: statusResp.content;
