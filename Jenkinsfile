@@ -72,7 +72,7 @@ pipeline {
           while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
             Thread.sleep(3000);
             counter = counter + 1;
-            def encodedIntegrationFlowID = URLEncoder.encode(env.IntegrationFlowID, 'UTF-8')
+            println("Token: " + token);
             def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
               customHeaders: [
                 [maskValue: false, name: 'Authorization', value: token]
@@ -82,7 +82,6 @@ pipeline {
               timeout: 30,
               consoleLogResponseBody: true,
               quiet: false,
-              ignoreSslErrors: true,
               url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
             def jsonStatusObj = readJSON text: statusResp.content;
             deploymentStatus = jsonStatusObj.d.Status;
