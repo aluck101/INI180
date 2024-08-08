@@ -80,7 +80,7 @@ pipeline {
               responseHandle: 'LEAVE_OPEN',
               timeout: 30,
               consoleLogResponseBody: true,
-              url: "https://ccci-integration-suite-fuom1yo5.it-cpi024.cfapps.eu10-002.hana.ondemand.com/api/v1/IntegrationRuntimeArtifacts(CICDTest)";
+              url: "https://ccci-integration-suite-fuom1yo5.it-cpi024.cfapps.eu10-002.hana.ondemand.com/api/v1/IntegrationRuntimeArtifacts("CICDTest")";
              // url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')';
               
 
