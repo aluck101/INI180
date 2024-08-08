@@ -74,7 +74,7 @@ pipeline {
             counter = counter + 1;
             def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
               customHeaders: [
-                [maskValue: true, name: 'Authorization', value: token]
+                [maskValue: false, name: 'Authorization', value: token]
               ],
               httpMode: 'GET',
               responseHandle: 'LEAVE_OPEN',
