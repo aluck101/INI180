@@ -86,8 +86,11 @@ pipeline {
 						bat 'git add .'
 					}
 					println("Store integration artefact in Git")
-					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials ,usernameVariable: 'GIT_AUTHOR_NAME', passwordVariable: 'GIT_PASSWORD'],
-                    string(credentialsId: 'GIT_TOKEN', variable: 'GIT_TOKEN') ]) {  
+					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials ,usernameVariable: 'GIT_AUTHOR_NAME', passwordVariable: 'GIT_PASSWORD']]) {  
+
+                        echo "GIT_AUTHOR_NAME: ${env.GIT_AUTHOR_NAME}"
+                        echo "GITRepositoryURL: ${env.GITRepositoryURL}"
+                        echo "GITBranch: ${env.GITBranch}"
 						bat '''
                         git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
                         '''
