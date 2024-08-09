@@ -89,9 +89,8 @@ pipeline {
 					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials ,usernameVariable: 'GIT_AUTHOR_NAME', passwordVariable: 'GIT_PASSWORD']]) {  
 						bat '''
                         git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
-						git push https://${GIT_PASSWORD}@'+ env.GITRepositoryURL + 'HEAD:' + env.GITBranch
                         '''
-						// bat('git push https://${GIT_PASSWORD}@'+ env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
+						bat('git push https://${GIT_PASSWORD}@'+ env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
 					}				
 				}
 			}
