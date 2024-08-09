@@ -91,6 +91,7 @@ pipeline {
                         echo "GIT_AUTHOR_NAME: ${env.GIT_AUTHOR_NAME}"
                         echo "GITRepositoryURL: ${env.GITRepositoryURL}"
                         echo "GITBranch: ${env.GITBranch}"
+                        echo "GITBranch: ${env.GIT_PASSWORD}"
 						bat '''
                         git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
                         '''
