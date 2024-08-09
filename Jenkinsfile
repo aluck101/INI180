@@ -78,6 +78,7 @@ pipeline {
                 [maskValue: false, name: 'Authorization', value: token]
               ],
               httpMode: 'GET',
+              contentType: ' APPLICATION_OCTETSTREAM',
               responseHandle: 'LEAVE_OPEN',
               timeout: 30,
               consoleLogResponseBody: true,
