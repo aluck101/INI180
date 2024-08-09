@@ -12,6 +12,7 @@ pipeline {
 		GITBranch = "${env.GITBranch}"
         GITFolder = "${env.GITFolder}"
         GITComment = "${env.GITComment}"
+        GIT_TOKEN = "${env.GIT_TOKEN}"
    	}
 	
 	stages {
@@ -89,7 +90,7 @@ pipeline {
 						bat '''
                         git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
                         '''
-						bat('git push https://${GIT_AUTHOR_NAME}:${GIT_PASSWORD}@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
+						bat('git push https://${GIT_AUTHOR_NAME}:${GIT_TOKEN}@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
 					}				
 				}
 			}
