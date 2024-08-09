@@ -69,51 +69,11 @@ pipeline {
           def deploymentStatus;
           def continueLoop = true;
           println("Start checking integration artefact status.");
-        //   while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
-        //     Thread.sleep(3000);
-        //     counter = counter + 1;
-        //     println("Token: " + token);
-        //     def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
-        //       customHeaders: [
-        //         [maskValue: false, name: 'Authorization', value: token]
-        //       ],
-        //       httpMode: 'GET',
-        //       responseHandle: 'LEAVE_OPEN',
-        //       timeout: 30,
-        //       consoleLogResponseBody: true,
-        //       quiet: false,
-        //       url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')'
-        //     def jsonStatusObj = readJSON text: statusResp.content;
-        //     deploymentStatus = jsonStatusObj.d.Status;
-
-        //     println("Deployment status: " + deploymentStatus);
-        //     if (deploymentStatus.equalsIgnoreCase("Error")) {
-        //       //get error details
-        //       def deploymentErrorResp = httpRequest acceptType: 'APPLICATION_JSON',
-        //         customHeaders: [
-        //           [maskValue: false, name: 'Authorization', value: token]
-        //         ],
-        //         httpMode: 'GET',
-        //         responseHandle: 'LEAVE_OPEN',
-        //         timeout: 30,
-        //         url: 'https://' + env.CPIHost + '/api/v1/IntegrationRuntimeArtifacts(\'' + env.IntegrationFlowID + '\')' + '/ErrorInformation/$value';
-        //       def jsonErrObj = readJSON text: deploymentErrorResp.content
-        //       def deployErrorInfo = jsonErrObj.parameter;
-        //       println("Error Details: " + deployErrorInfo);
-        //       statusResp.close();
-        //       deploymentErrorResp.close();
-        //       //end job
-        //       currentBuild.result = 'FAILURE'
-        //       return
-        //     } else if (deploymentStatus.equalsIgnoreCase("Started")) {
-        //       println("Integration flow deployment successful")
-        //       statusResp.close();
-        //       continueLoop = false
-        //     } else {
-        //       println("The integration flow is not yet started. Will wait 3s and then check again.")
-        //     }
-        //   }
-          def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
+          while (counter < env.DeploymentCheckRetryCounter.toInteger() & continueLoop == true) {
+            Thread.sleep(3000);
+            counter = counter + 1;
+            println("Token: " + token);
+            def statusResp = httpRequest acceptType: 'APPLICATION_JSON',
               customHeaders: [
                 [maskValue: false, name: 'Authorization', value: token]
               ],
@@ -148,10 +108,11 @@ pipeline {
             } else if (deploymentStatus.equalsIgnoreCase("Started")) {
               println("Integration flow deployment successful")
               statusResp.close();
+              continueLoop = false
             } else {
               println("The integration flow is not yet started. Will wait 3s and then check again.")
             }
-
+          }
 
           if (!deploymentStatus.equalsIgnoreCase("Started")) {
             println("No final deployment status reached. Current status: \'" + deploymentStatus);
