@@ -88,7 +88,7 @@ pipeline {
 					println("Store integration artefact in Git")
 					withCredentials([string(credentialsId: env.GITToken, variable: 'GIT_TOKEN')]) {  
 						bat '''
-						  git checkout ${env.GITBranch} || git checkout -b ${env.GITBranch}
+						  git checkout ${GITBranch} || git checkout -b ${GITBranch}
                           git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
        					  git status
 						  git remote -v
