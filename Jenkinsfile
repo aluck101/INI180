@@ -86,13 +86,13 @@ pipeline {
 						bat 'git add .'
 					}
 					println("Store integration artefact in Git")
-					withCredentials([string (credentialsId: env.GITToken, variable: 'GITToken')]) {  
+					withCredentials([gitUsernamePassword(credentialsId: env.GITCredentials, gitToolName: 'git-tool')]) {  
 						bat '''
                         git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
 						git status
                         '''
 						echo "About to push changes"
-						bat('git push https://${GITToken}@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
+						bat('git push' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
 					}				
 				}
 			}
