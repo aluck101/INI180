@@ -94,8 +94,6 @@ pipeline {
 						  git remote -v
        					  git push origin HEAD:master
                         '''
-						// echo "About to push changes"
-						// bat('git push https://${GIT_TOKEN}@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
 					}				
 				}
 			}
