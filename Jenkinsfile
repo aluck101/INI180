@@ -13,7 +13,6 @@ pipeline {
 		GITBranch = "${env.GITBranch}"
         GITFolder = "${env.GITFolder}"
         GITComment = "${env.GITComment}"
-        GITToken = "${env.GIT_TOKEN}"
    	}
 	
 	stages {
