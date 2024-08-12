@@ -90,8 +90,6 @@ pipeline {
 						bat '''
 						  git checkout master
                           git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
-       					  git status
-						  git remote -v
        					  git push origin HEAD:master
                         '''
 					}				
