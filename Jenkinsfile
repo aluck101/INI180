@@ -88,12 +88,12 @@ pipeline {
 					println("Store integration artefact in Git")
 					withCredentials([string(credentialsId: env.GITToken, variable: 'GIT_TOKEN')]) {  
 						bat '''
-						  git checkout ${GITBranch} || git checkout -b ${GITBranch}
+						  git checkout master
                           git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
        					  git status
 						  git remote -v
-        				  git remote set-url origin https://$GIT_TOKEN@${GITRepositoryURL}
-       					  git push origin HEAD:${env.GITBranch}
+        				  git remote set-url origin https://$GIT_TOKEN@https://github.com/aluck101/INI180.git
+       					  git push origin HEAD:master
                         '''
 						// echo "About to push changes"
 						// bat('git push https://${GIT_TOKEN}@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
