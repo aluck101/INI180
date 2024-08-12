@@ -9,6 +9,7 @@ pipeline {
 		CPIOAuthCredentials = "${env.CPI_OAUTH_CRED}"	
 		GITRepositoryURL  =  "${env.GITRepositoryURL}"
 		GITCredentials = "${env.GITCredentials}"
+		GITToken = "${env.GITToken}"
 		GITBranch = "${env.GITBranch}"
         GITFolder = "${env.GITFolder}"
         GITComment = "${env.GITComment}"
@@ -86,13 +87,12 @@ pipeline {
 						bat 'git add .'
 					}
 					println("Store integration artefact in Git")
-					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials ,usernameVariable: 'GIT_AUTHOR_NAME', passwordVariable: 'GIT_TOKEN']]) {  
+					withCredentials([string (credentialsId: env.GITToken, variable: 'GIT_TOKEN')]) {  
 						bat '''
                         git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
 						git status
                         '''
 						echo "About to push changes"
-						echo 'whoiam'
 						int status = bat('git push https://$GIT_TOKEN@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
 						returnStatus: true
 					}				
