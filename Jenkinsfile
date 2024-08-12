@@ -91,7 +91,7 @@ pipeline {
 						  git checkout ${env.GITBranch} || git checkout -b ${env.GITBranch}
                           git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
        					  git status
-        				  git remote set-url origin https://${GIT_TOKEN}@${env.GITRepositoryURL#https://}
+        				  git remote set-url origin https://${GIT_TOKEN}@${env.GITRepositoryURL}
        					  git push origin HEAD:${env.GITBranch}
                         '''
 						// echo "About to push changes"
