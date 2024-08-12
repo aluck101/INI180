@@ -86,13 +86,17 @@ pipeline {
 						bat 'git add .'
 					}
 					println("Store integration artefact in Git")
-					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials ,usernameVariable: 'GIT_AUTHOR_NAME', passwordVariable: 'GIT_PASSWORD']]) {  
+					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials ,usernameVariable: 'GIT_AUTHOR_NAME', passwordVariable: 'Name']]) {  
+						
+						echo "Name: ${Name}"
+						
 						bat '''
                         git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
 						git status
-						git checkout -b Test
                         '''
-						bat('git push https://$GIT_PASSWORD@' + env.GITRepositoryURL + ' Test')
+						echo "About to push changes"
+						int status = bat('git push https://GIT_TOKEN@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
+						returnStatus: true
 					}				
 				}
 			}
