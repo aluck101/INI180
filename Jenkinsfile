@@ -89,6 +89,8 @@ pipeline {
 					withCredentials([string(credentialsId: env.GITToken, variable: 'GIT_TOKEN')]) {  
 						bat '''
 						  git config --global credential.helper store	
+						  git config --global advice.statusUgh false
+						  git config --global core.quotepath false
                           git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
        					  git status
 						  git remote -v
