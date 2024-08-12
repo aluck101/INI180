@@ -86,7 +86,7 @@ pipeline {
 						bat 'git add .'
 					}
 					println("Store integration artefact in Git")
-					withCredentials([gitUsernamePassword(credentialsId: 'my-credentials-id', gitToolName: 'Default')]) {  
+					withCredentials([gitUsernamePassword(credentialsId: GITCredentials, gitToolName: 'Default')]) {  
 						bat '''
 						  git checkout master
                           git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
