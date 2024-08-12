@@ -92,7 +92,7 @@ pipeline {
 						git status
                         '''
 						echo "About to push changes"
-						echo whoiam
+						echo 'whoiam'
 						int status = bat('git push https://$GIT_TOKEN@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
 						returnStatus: true
 					}				
