@@ -90,8 +90,8 @@ pipeline {
 						bat '''
                         git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
 						git status
-						git remote set-url origin https://${GIT_TOKEN}@${envGITRepositoryURL}
-						git push origin ${env.GITBranch}
+						git remote set-url origin https://${GIT_TOKEN}@${env.GITRepositoryURL}
+						git push ${env.GITBranch}
                         '''
 						// echo "About to push changes"
 						// bat('git push ' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
