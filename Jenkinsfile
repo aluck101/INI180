@@ -88,13 +88,10 @@ pipeline {
 					println("Store integration artefact in Git")
 					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.GITCredentials ,usernameVariable: 'GIT_AUTHOR_NAME', passwordVariable: 'GIT_PASSWORD']]) {  
 						bat '''
-						  git config --global credential.helper store	
-						  git config --global advice.statusUgh false
-						  git config --global core.quotepath false
                           git diff-index --quiet HEAD || git commit -m "Integration Artefacts update from CICD pipeline"
        					  git status
 						  git remote -v
-						  git push https://${GIT_PASSWORD}@github.com/aluck101/INI180.git HEAD:origin/master					
+						  git push https://hdhdhidih@github.com/aluck101/INI180.git HEAD:origin/master					
                         '''
 						// echo "About to push changes"
 						// bat('git push https://${GIT_TOKEN}@' + env.GITRepositoryURL + ' HEAD:' + env.GITBranch)
