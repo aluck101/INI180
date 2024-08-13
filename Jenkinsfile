@@ -9,7 +9,6 @@ pipeline {
 		CPIOAuthCredentials = "${env.CPI_OAUTH_CRED}"	
 		GITRepositoryURL  =  "${env.GITRepositoryURL}"
 		GITCredentials = "${env.GITCredentials}"
-		GITToken = "${env.GITToken}"
 		GITBranch = "${env.GITBranch}"
         GITFolder = "${env.GITFolder}"
         GITComment = "${env.GITComment}"
