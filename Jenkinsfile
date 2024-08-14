@@ -3,7 +3,7 @@ pipeline {
 
 	//Configure the following environment variables before executing the Jenkins Job	
 	environment {
-		IntegrationFlowID = "${env.IntegrationFlowID}"
+		IntegrationFlowID = "Basic_Authentication"
 		CPIHost = "${env.CPI_HOST}"
 		CPIOAuthHost = "${env.CPI_OAUTH_HOST}"
 		CPIOAuthCredentials = "${env.CPI_OAUTH_CRED}"	
