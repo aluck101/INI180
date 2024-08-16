@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:n1="urn:sap-com:document:sap:rfc:functions">
+ <wsdl:documentation>
+  <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl"/>
+ </wsdl:documentation>
+ <wsp:UsingPolicy wsdl:required="true"/>
+ <wsp:Policy wsu:Id="IF_IF_ZGETMATERIAL_DESC">
+  <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+   <sapsession:enableSession>false</sapsession:enableSession>
+  </sapsession:Session>
+ </wsp:Policy>
+ <wsp:Policy wsu:Id="OP_IF_OP_ZTaluSoapService">
+  <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+  <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+  <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+  <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+ </wsp:Policy>
+ <wsdl:types>
+  <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions" xmlns:tns="urn:sap-com:document:sap:rfc:functions">
+   <xsd:simpleType name="char40">
+    <xsd:restriction base="xsd:string">
+     <xsd:maxLength value="40"/>
+    </xsd:restriction>
+   </xsd:simpleType>
+  </xsd:schema>
+  <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:n0="urn:sap-com:document:sap:rfc:functions">
+   <xsd:import namespace="urn:sap-com:document:sap:rfc:functions"/>
+   <xsd:element name="ZTaluSoapService">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="MaterialId" type="n0:char40"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ZTaluSoapServiceResponse">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="MaterialDescription" type="n0:char40"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+  </xsd:schema>
+ </wsdl:types>
+ <wsdl:message name="ZTaluSoapService">
+  <wsdl:part name="parameters" element="tns:ZTaluSoapService"/>
+ </wsdl:message>
+ <wsdl:message name="ZTaluSoapServiceResponse">
+  <wsdl:part name="parameter" element="tns:ZTaluSoapServiceResponse"/>
+ </wsdl:message>
+ <wsdl:portType name="ZGETMATERIAL_DESC">
+  <wsp:Policy>
+   <wsp:PolicyReference URI="#IF_IF_ZGETMATERIAL_DESC"/>
+  </wsp:Policy>
+  <wsdl:operation name="ZTaluSoapService">
+   <wsp:Policy>
+    <wsp:PolicyReference URI="#OP_IF_OP_ZTaluSoapService"/>
+   </wsp:Policy>
+   <wsdl:input message="tns:ZTaluSoapService"/>
+   <wsdl:output message="tns:ZTaluSoapServiceResponse"/>
+  </wsdl:operation>
+ </wsdl:portType>
+</wsdl:definitions>
